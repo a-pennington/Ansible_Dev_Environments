@@ -1,0 +1,18 @@
+# C++ Dev Environment container definition
+
+# Argument default definitions
+ARG BASE_IMG_URL="localhost/dev"
+ARG BASE_IMG_TAG="latest"
+
+FROM $BASE_IMG_URL:$BASE_IMG_TAG
+
+USER root
+RUN apt update \
+  && apt upgrade -y \
+  && apt install -y \
+    git \
+    make \
+    cmake \
+    gcc \
+    g++ \
+  && apt autoremove -y 

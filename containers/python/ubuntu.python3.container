@@ -1,0 +1,16 @@
+# Python3 Dev Environment container definition
+
+# Argument default definitions
+ARG BASE_IMG_URL="localhost/dev"
+ARG BASE_IMG_TAG="latest"
+
+FROM $BASE_IMG_URL:$BASE_IMG_TAG
+
+USER root
+RUN apt update \
+  && apt upgrade -y \
+  && apt install -y \
+    python3 \
+    python3-pip \
+  && apt autoremove -y \
+  && update-alternatives --install /usr/local/bin/python python /usr/bin/python3 2

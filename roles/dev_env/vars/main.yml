@@ -1,0 +1,4 @@
+---
+
+__dev_container_dir: "{{ dev_container_file | dirname }}"
+__dev_container_file: "{{ dev_container_file | basename }}"

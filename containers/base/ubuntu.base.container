@@ -1,0 +1,61 @@
+# Ubuntu environment base container definition
+
+# Argument default definitions
+ARG BASE_IMG_URL="docker.io/ubuntu"
+ARG BASE_IMG_TAG="latest"
+ARG ROOT_PASSWORD="default_password"
+ARG USER_NAME="dev"
+ARG USER_PASSWORD="default_password"
+
+FROM $BASE_IMG_URL:$BASE_IMG_TAG
+
+# Pass necessary arguments to build stages
+ARG ROOT_PASSWORD
+ARG USER_NAME
+ARG USER_PASSWORD
+
+ENV DEBIAN_FRONTEND="noninteractive"
+
+RUN apt update \
+  && apt upgrade -y \
+  && apt install -y \
+    software-properties-common \
+    build-essential \
+    openssh-server \
+    sudo \
+    zsh \
+    make \
+    nano \
+    emacs \
+    vim \
+    tldr \
+    tree \
+  && apt autoremove -y \
+  && mkdir -p /var/run/sshd
+
+# Expose SSH port
+# TODO: Modify SSH port to be provided as argument
+EXPOSE 22
+
+# Change the root password
+RUN echo 'root:$ROOT_PASSWORD' | chpasswd
+
+# Add a new user
+RUN groupadd $USER_NAME \
+  && useradd -rm -d /home/$USER_NAME -s /bin/bash -g $USER_NAME -G sudo $USER_NAME \
+  && /bin/bash -c "echo '$USER_NAME:$USER_PASSWORD' | chpasswd" \
+  && /bin/bash -c "echo '$USER_NAME ALL=(ALL) NOPASSWD:ALL' | tee -a /etc/sudoers"
+
+# Update tldr database for newly created user
+USER $USER_NAME
+RUN mkdir -p /home/$USER_NAME/.local/share/tldr \
+  && /bin/tldr --update
+
+# Reset the user to root
+USER root
+
+# Create the workspace folder
+# TODO: Ensure workspace is owned by user
+RUN mkdir -p /workspace
+
+ENTRYPOINT ["/usr/sbin/sshd","-D"]

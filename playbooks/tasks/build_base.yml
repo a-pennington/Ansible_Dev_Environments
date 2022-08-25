@@ -1,0 +1,13 @@
+---
+
+- include_role:
+    name: dev_env
+  vars:
+    dev_container_file: "{{ containers.base.container_file }}"
+    dev_image_name: "{{ containers.base.image.name }}"
+    dev_image_tag: "{{ containers.base.image.tag }}"
+    dev_base_image_url: "{{ containers.base.base_image.registry }}/{{ containers.base.base_image.name }}"
+    dev_base_image_tag: "{{ containers.base.base_image.tag }}"
+    dev_force_build: true
+  tags:
+    - build

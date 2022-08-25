@@ -1,0 +1,7 @@
+---
+
+__caddy_base_image_url: docker.io/caddy
+__caddy_base_image_tag: latest
+
+__caddy_container_dir: "{{ caddy_container_file | dirname }}"
+__caddy_container_file: "{{ caddy_container_file | basename }}"

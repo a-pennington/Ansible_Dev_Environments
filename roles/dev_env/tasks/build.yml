@@ -1,0 +1,20 @@
+---
+
+- name: Building the container
+  containers.podman.podman_image:
+    name: "{{ dev_image_name }}"
+    tag: "{{ dev_image_tag }}"
+    path: "{{ __dev_container_dir }}"
+    state: build
+    force: "{{ dev_force_build | bool }}"
+    build:
+      # TODO: Provide build args as a list
+      extra_args: >
+        -f "{{ __dev_container_file }}"
+        --build-arg="BASE_IMG_URL={{ dev_base_image_url }}"
+        --build-arg="BASE_IMG_TAG={{ dev_base_image_tag }}"
+        --build-arg="ROOT_PASSWORD={{ dev_root_password }}"
+        --build-arg="USER_NAME={{ dev_user_name }}"
+        --build-arg="USER_PASSWORD={{ dev_user_password }}"
+  tags:
+    - build

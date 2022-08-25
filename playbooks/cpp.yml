@@ -1,0 +1,25 @@
+---
+
+- hosts: cpp
+  tasks:
+    - name: Building the base container image
+      include_tasks:
+        file: tasks/build_base.yml
+      tags:
+        - build
+
+    - name: Running the Cpp container actions
+      include_role:
+        name: dev_env
+      vars:
+        dev_container_name: "{{ containers.cpp.name }}"
+        dev_container_hostname: "{{ containers.cpp.hostname }}"
+        dev_image_name: "{{ containers.cpp.image.name }}"
+        dev_image_tag: "{{ containers.cpp.image.tag }}"
+        dev_port_mappings: "{{ containers.cpp.ports }}"
+        dev_volume_mappings: "{{ containers.cpp.volumes }}"
+        dev_recreate_container: true
+      tags:
+        - start
+        - stop
+        - restart

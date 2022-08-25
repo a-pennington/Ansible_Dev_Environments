@@ -1,0 +1,25 @@
+---
+
+dev_base_image_url: docker.io/ubuntu
+dev_base_image_tag: latest
+
+dev_image_name: dev
+dev_image_tag: latest
+
+dev_container_name: dev
+dev_container_hostname: Dev-Environment
+
+dev_container_file: "{{ ansible_config_file | dirname }}/containers/base/ubuntu.base.container"
+
+dev_root_password: default
+dev_user_name: dev
+dev_user_password: default
+
+dev_port_mappings: []
+  # - "10000:22"
+
+dev_volume_mappings: []
+  # - "/home/andrew/workspace:/workspace"
+
+dev_force_build: false
+dev_recreate_container: false

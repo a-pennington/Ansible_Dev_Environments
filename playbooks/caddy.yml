@@ -1,0 +1,9 @@
+---
+
+- hosts: caddy
+  tasks:
+    - include_role:
+        name: caddy
+        tasks_from: build.yml
+      vars:
+        caddy_force_build: true

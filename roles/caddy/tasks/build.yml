@@ -1,0 +1,16 @@
+---
+
+- name: Build the container
+  become: true
+  containers.podman.podman_image:
+    name: "{{ caddy_image_name }}"
+    tag: "{{ caddy_image_tag }}"
+    path: "{{ __caddy_container_dir }}"
+    state: build
+    force: "{{ caddy_force_build | bool }}"
+    build:
+      extra_args: >
+        -f "{{ __caddy_container_file }}"
+        --build-arg="CADDY_SOURCE={{ __caddy_base_image_url }}"
+        --build-arg="CADDY_VERSION={{ __caddy_base_image_tag }}"
+        --build-arg="DNS_PROVIDER={{ caddy_dns_provider }}"

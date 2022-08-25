@@ -1,0 +1,14 @@
+---
+
+- name: Starting the container
+  containers.podman.podman_container:
+    name: "{{ dev_container_name }}"
+    image: "{{ dev_image_name }}:{{ dev_image_tag }}"
+    recreate: "{{ dev_recreate_container | bool }}"
+    ports: "{{ dev_port_mappings | default(omit) }}"
+    volumes: "{{ dev_volume_mappings | default(omit) }}"
+    hostname: "{{ dev_container_hostname }}"
+    state: started
+  tags:
+    - start
+    - restart

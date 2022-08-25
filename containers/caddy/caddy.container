@@ -1,0 +1,17 @@
+# Caddy reverse proxy container definition
+# Included DNS provider modules to allow wildcard certificates
+
+ARG CADDY_URL="docker.io/caddy"
+ARG CADDY_TAG="latest"
+ARG DNS_PROVIDER="cloudflare"
+
+FROM $CADDY_URL:builder AS builder
+
+ARG DNS_PROVIDER
+
+RUN xcaddy build \
+  --with "github.com/caddy-dns/$DNS_PROVIDER"
+
+FROM $CADDY_URL:$CADDY_TAG
+
+COPY --from=builder /usr/bin/caddy /usr/bin/caddy

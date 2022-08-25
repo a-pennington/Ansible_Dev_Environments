@@ -1,0 +1,10 @@
+---
+
+caddy_image_name: caddy
+caddy_image_tag: latest
+
+caddy_container_file: "{{ ansible_config_file | dirname }}/containers/caddy/caddy.container"
+
+caddy_dns_provider: cloudflare
+
+caddy_force_build: false

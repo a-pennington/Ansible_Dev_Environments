@@ -1,0 +1,9 @@
+---
+
+- name: Stopping the container
+  containers.podman.podman_container:
+    name: "{{ dev_container_name }}"
+    state: stopped
+  tags:
+    - stop
+    - restart

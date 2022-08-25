@@ -1,0 +1,25 @@
+---
+
+- hosts: node
+  tasks:
+    - name: Building the base container image
+      include_tasks:
+        file: tasks/build_base.yml
+      tags:
+        - build
+
+    - name: Running the Node container actions
+      include_role:
+        name: dev_env
+      vars:
+        dev_container_name: "{{ containers.node.name }}"
+        dev_container_hostname: "{{ containers.node.hostname }}"
+        dev_image_name: "{{ containers.node.image.name }}"
+        dev_image_tag: "{{ containers.node.image.tag }}"
+        dev_port_mappings: "{{ containers.node.ports }}"
+        dev_volume_mappings: "{{ containers.node.volumes }}"
+        dev_recreate_container: true
+      tags:
+        - start
+        - stop
+        - restart
