@@ -13,12 +13,12 @@
         name: dev_env
         tasks_from: restart.yml
       vars:
-        dev_container_name: "{{ containers.base.name }}"
-        dev_container_hostname: "{{ containers.base.hostname }}"
-        dev_image_name: "{{ containers.base.image.name }}"
-        dev_image_tag: "{{ containers.base.image.tag }}"
-        dev_port_mappings: "{{ containers.base.ports }}"
-        dev_volume_mappings: "{{ containers.base.volumes }}"
+        dev_container_name: "{{ base.name }}"
+        dev_container_hostname: "{{ base.hostname }}"
+        dev_image_name: "{{ base.image.name }}"
+        dev_image_tag: "{{ base.image.tag }}"
+        dev_port_mappings: "{{ base.ports }}"
+        dev_volume_mappings: "{{ base.volumes }}"
         dev_recreate_container: true
       tags:
         - start

@@ -12,19 +12,19 @@
       include_role:
         name: dev_env
       vars:
-        dev_image_name: "{{ containers.cpp.image.name }}"
-        dev_image_tag: "{{ containers.cpp.image.tag }}"
+        dev_image_name: "{{ cpp.image.name }}"
+        dev_image_tag: "{{ cpp.image.tag }}"
         # Build variables
-        dev_container_file: "{{ containers.cpp.container_file }}"
+        dev_container_file: "{{ cpp.container_file }}"
         dev_build_args:
-          - BASE_IMG_URL={{ containers.cpp.base_image.registry }}/{{ containers.cpp.base_image.name }}
-          - BASE_IMG_TAG={{ containers.cpp.base_image.tag }}
+          - BASE_IMG_URL={{ cpp.base_image.registry }}/{{ cpp.base_image.name }}
+          - BASE_IMG_TAG={{ cpp.base_image.tag }}
         dev_force_build: true
         # Run variables
-        dev_container_name: "{{ containers.cpp.name }}"
-        dev_container_hostname: "{{ containers.cpp.hostname }}"
-        dev_port_mappings: "{{ containers.cpp.ports }}"
-        dev_volume_mappings: "{{ containers.cpp.volumes }}"
+        dev_container_name: "{{ cpp.name }}"
+        dev_container_hostname: "{{ cpp.hostname }}"
+        dev_port_mappings: "{{ cpp.ports }}"
+        dev_volume_mappings: "{{ cpp.volumes }}"
         dev_recreate_container: true
       tags:
         - build

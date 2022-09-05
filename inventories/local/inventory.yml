@@ -1,26 +1,8 @@
 all:
   children:
-    # _____ nodes by server type; not to be used directly _____
     local_machine:
       hosts:
         localhost:
           ansible_connection: local
           ansible_host: 127.0.0.1
           ansible_fqdn: localhost
-
-    # _____ nodes by product; use these for playbooks _____
-    caddy:
-      children:
-        local_machine:
-    ubuntu:
-      children:
-        local_machine:
-    cpp:
-      children:
-        local_machine:
-    node:
-      children:
-        local_machine:
-    python3:
-      children:
-        local_machine:    

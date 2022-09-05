@@ -1,0 +1,17 @@
+all:
+  children:
+    caddy:
+      children:
+        local_machine:
+    ubuntu:
+      children:
+        local_machine:
+    cpp:
+      children:
+        local_machine:
+    node:
+      children:
+        local_machine:
+    python3:
+      children:
+        local_machine:    

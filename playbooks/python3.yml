@@ -12,19 +12,19 @@
       include_role:
         name: dev_env
       vars:
-        dev_image_name: "{{ containers.python3.image.name }}"
-        dev_image_tag: "{{ containers.python3.image.tag }}"
+        dev_image_name: "{{ python3.image.name }}"
+        dev_image_tag: "{{ python3.image.tag }}"
         # Build variables
-        dev_container_file: "{{ containers.python3.container_file }}"
+        dev_container_file: "{{ python3.container_file }}"
         dev_build_args:
-          - BASE_IMG_URL={{ containers.python3.base_image.registry }}/{{ containers.python3.base_image.name }}
-          - BASE_IMG_TAG={{ containers.python3.base_image.tag }}
+          - BASE_IMG_URL={{ python3.base_image.registry }}/{{ python3.base_image.name }}
+          - BASE_IMG_TAG={{ python3.base_image.tag }}
         dev_force_build: true
         # Run variables
-        dev_container_name: "{{ containers.python3.name }}"
-        dev_container_hostname: "{{ containers.python3.hostname }}"
-        dev_port_mappings: "{{ containers.python3.ports }}"
-        dev_volume_mappings: "{{ containers.python3.volumes }}"
+        dev_container_name: "{{ python3.name }}"
+        dev_container_hostname: "{{ python3.hostname }}"
+        dev_port_mappings: "{{ python3.ports }}"
+        dev_volume_mappings: "{{ python3.volumes }}"
         dev_recreate_container: true
       tags:
         - build
