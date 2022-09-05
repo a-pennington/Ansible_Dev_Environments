@@ -11,10 +11,8 @@
       # TODO: Provide build args as a list
       extra_args: >
         -f "{{ __dev_container_file }}"
-        --build-arg="BASE_IMG_URL={{ dev_base_image_url }}"
-        --build-arg="BASE_IMG_TAG={{ dev_base_image_tag }}"
-        --build-arg="ROOT_PASSWORD={{ dev_root_password }}"
-        --build-arg="USER_NAME={{ dev_user_name }}"
-        --build-arg="USER_PASSWORD={{ dev_user_password }}"
+        {% for arg in dev_build_args %}
+        --build-arg="{{ arg }}"
+        {% endfor %}
   tags:
     - build

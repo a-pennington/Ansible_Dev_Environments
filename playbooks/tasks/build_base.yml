@@ -2,6 +2,7 @@
 
 - include_role:
     name: dev_env
+    tasks_from: build.yml
   vars:
     dev_container_file: "{{ containers.base.container_file }}"
     dev_image_name: "{{ containers.base.image.name }}"
@@ -9,5 +10,12 @@
     dev_base_image_url: "{{ containers.base.base_image.registry }}/{{ containers.base.base_image.name }}"
     dev_base_image_tag: "{{ containers.base.base_image.tag }}"
     dev_force_build: true
+    dev_build_args:
+      - BASE_IMG_URL={{ dev_base_image_url }}
+      - BASE_IMG_TAG={{ dev_base_image_tag }}
+      - ROOT_PASSWORD={{ root_password }}
+      - USER_NAME={{ user_name }}
+      - USER_PASSWORD={{ user_password }}
+
   tags:
     - build

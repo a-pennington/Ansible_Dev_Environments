@@ -11,6 +11,7 @@
     - name: Running the Base container actions
       include_role:
         name: dev_env
+        tasks_from: restart.yml
       vars:
         dev_container_name: "{{ containers.base.name }}"
         dev_container_hostname: "{{ containers.base.hostname }}"
