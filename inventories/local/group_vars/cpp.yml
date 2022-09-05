@@ -1,0 +1,19 @@
+---
+# C++ dev environment defaults
+
+cpp:
+  name: cpp
+  hostname: Cpp-Environment
+  container_file: "{{ ansible_config_file | dirname }}/containers/cpp/ubuntu.cpp.container"
+  base_image:
+    registry: localhost
+    name: base
+    tag: latest
+  image:
+    registry: localhost
+    name: cpp
+    tag: latest
+  ports:
+    - "20000:22"
+  volumes:
+    - "/home/andrew/workspace:/workspace"

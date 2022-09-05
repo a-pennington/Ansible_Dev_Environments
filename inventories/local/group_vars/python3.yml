@@ -1,0 +1,19 @@
+---
+# Python3 dev environment defaults
+
+python3:
+  name: python3
+  hostname: Python3-Environment
+  container_file: "{{ ansible_config_file | dirname }}/containers/python/ubuntu.python3.container"
+  base_image:
+    registry: localhost
+    name: base
+    tag: latest
+  image:
+    registry: localhost
+    name: python3
+    tag: latest
+  ports:
+    - "40000:22"
+  volumes:
+    - "/home/andrew/workspace:/workspace"

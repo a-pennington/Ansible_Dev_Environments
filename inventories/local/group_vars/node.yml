@@ -1,0 +1,19 @@
+---
+# Node dev environment defaults
+
+node:
+  name: node
+  hostname: Node-Environment
+  container_file: "{{ ansible_config_file | dirname }}/containers/node/ubuntu.node.container"
+  base_image:
+    registry: localhost
+    name: base
+    tag: latest
+  image:
+    registry: localhost
+    name: node
+    tag: latest
+  ports:
+    - "30000:22"
+  volumes:
+    - "/home/andrew/workspace:/workspace"

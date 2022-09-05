@@ -1,0 +1,24 @@
+---
+# Inventory global variables
+
+root_password: default
+user_name: dev
+user_password: default
+
+# Base container definitions
+base:
+  name: dev
+  hostname: Dev-Environment
+  container_file: "{{ ansible_config_file | dirname }}/containers/base/ubuntu.base.container"
+  base_image:
+    registry: docker.io
+    name: ubuntu
+    tag: latest
+  image:
+    registry: localhost
+    name: base
+    tag: latest
+  ports:
+    - "10000:22"
+  volumes:
+    - "/home/andrew/workspace:/workspace"
